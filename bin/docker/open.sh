@@ -1,1 +1,1 @@
-docker exec -it phpdockerized_front_1 bash
+docker exec -it flexcoreenterprise_front_1 bash

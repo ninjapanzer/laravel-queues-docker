@@ -59,11 +59,13 @@ WORKDIR /var/app
 
 RUN git clone https://github.com/creationix/nvm.git $NVM_DIR && \
     cd $NVM_DIR && \
-    git checkout `git describe --abbrev=0 --tags`
+    git checkout `git describe --abbrev=0 --tags` && \
+    . "$NVM_DIR/nvm.sh"
 
 RUN source $NVM_DIR/nvm.sh || true && \
     nvm install && \
     nvm use && \
-    yarn global add gulp --prefix /usr/local
+    echo $(dirname $(which node)) && \
+    echo PATH=$(dirname $(which node)):$PATH > /etc/environment
 
 ENTRYPOINT ["/usr/local/bin/docker/upgrade.sh"]

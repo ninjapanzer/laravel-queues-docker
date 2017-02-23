@@ -38,6 +38,16 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: savvy
 
+  beanstalk_console:
+    image: kusmierz/beanstalk-console
+    ports:
+      - "8081:80"
+    environment:
+      BEANSTALKD_HOST: beanstalkd
+      BEANSTALKD_PORT: 11300
+    links:
+      - beanstalkd:beanstalkd
+
   mysqlData:
     image: mysql:5.7
     entrypoint: /bin/bash
